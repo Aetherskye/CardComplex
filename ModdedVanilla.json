@@ -2,7 +2,7 @@
     "id": "CardComplex",
     "name": "CardComplex",
     "author": ["The Rat Pack System aka Aetherskye"],
-    "description": "a test mod... for now :p",
+    "description": "[VERY MUCH IN DEMO -- BASICALLY UNPLAYABLE] A balatro mod that thinks its a god! or a mod with complex cards",
     "prefix": "ocj",
     "main_file": "ModdedVanilla.lua",
     "badge_colour": "c7638f",
