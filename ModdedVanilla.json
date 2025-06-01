@@ -7,7 +7,7 @@
     "main_file": "ModdedVanilla.lua",
     "badge_colour": "c7638f",
     "dependencies": [
-        "Steamodded (>=1.0.0~ALPHA-1225a)"
+        "Steamodded (>=1.0.0~ALPHA-1225a)", "Talisman"
     ],
-    "version": "1.0.0"
+    "version": "0.0.0 - Aether Demo"
 }
