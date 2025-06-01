@@ -10,7 +10,7 @@ SMODS.Joker {
     pos = {x=0,y=0},
     soul_pos = {x=1,y=0},
     atlas = '2ethera',
-    rarity = 1,
+    rarity = 'ocj_concept',
     cost = 50,
     config = { extra ={
         cardRetriggers = 2,
