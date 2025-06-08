@@ -14,3 +14,9 @@ So far adds:
    - Add a story/lore to the mod
    - more jokers, many with their own unique mechanics
    - more probably lol
+
+All art and characters in the mod belong to/were created by me!
+Code was made by me with help from... it's like 12am remind me to do this but its quite a few ppl. 
+
+I love to hear ideas and suggestions :3 
+ --@Aetherskye on discord
