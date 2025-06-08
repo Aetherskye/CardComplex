@@ -1,8 +1,13 @@
 So far adds:
- - 3 Jokers
- - 1 rarity (basically nonfuctional)
+ - 4 Jokers
+ - 1 rarity 
+ - a texture im not fixing right now im so tired and i want to play deltarune 
 
-   As of now theres no way to access the new jokers! You will have to use DebugPlus to play with them. This is temporary and WILL CHANGE.
+   There is now a way to obtain the cards! A special 'placeholder' pack featuring a new character may now appear, containing the new cards. 
+   This is a temporary addition to make the 'demo' playable without debugplus.
+
+  Please report any bugs to @Aetherskye on discord!
+
 
    I have big ideas for this project, but its more of a hobby than anything!
    A more abstract roadmap I have is to:

@@ -1,8 +1,6 @@
 --BIG THANKS TO N FOR LETTING ME REFERENCE HIS CODE!!
 
 --[[
-Seems like I don't understand this enitrely, 
-Jokers/UI.lua; attempt to index 'area' (A Nil Value)
 
 Maybe ask N' for a few clairifications on what certain parts of codes mean.
 I think I'm starting to understand the nesting lists/objects now.
@@ -118,7 +116,7 @@ function Card:highlight(is_highlighted)
     
     self.highlighted = is_highlighted
     
-    if self.label == 'j_ocj_skye' then
+    if self.label == 'j_ocj_skye' and self.area == G.jokers then
          if self.children.use_button then
             self.children.use_button:remove()
             self.children.use_button = nil

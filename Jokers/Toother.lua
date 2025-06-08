@@ -12,6 +12,7 @@ SMODS.Joker {
     atlas = '2ethera',
     rarity = 'ocj_concept',
     cost = 50,
+    in_pools = con.tooth,
     config = { extra ={
         cardRetriggers = 2,
         cardMult = 2,

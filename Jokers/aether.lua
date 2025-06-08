@@ -1,6 +1,6 @@
 -------------------------------------INFO: AETHER
 ae = {
-    cards_destroyed = 0
+    cards_destroyed = 0,
 } -- Table of functions for Aether but might be used Elsewhere
 function ae.destroyTarget(target, aethLoc)
 	local destroyed = aethLoc + target
@@ -11,9 +11,8 @@ function ae.destroyTarget(target, aethLoc)
 		local toothspawn = SMODS.create_card({key = 'j_ocj_2ether'})
 		G.jokers:emplace(toothspawn)
 		print("2ethered!")
-	else
-	G.jokers.cards[destroyed]:start_dissolve()
-    ae.cards_destroyed = ae.cards_destroyed + 1
+	elseif G.jokers.cards[destroyed].config.center_key == 'j_ocj_Rust' then
+	rstGlobal.aetherkill = true
 	end
 end
 
@@ -62,7 +61,7 @@ SMODS.Atlas {
     py = 95
 }
 
---- actually him lol
+--- actually him lol -- what does this comment mean???
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'aethercard',
@@ -102,6 +101,7 @@ SMODS.Joker {
     soul_pos = {x=4,y=1},
 	-- Cost of card in shop.
 	cost = 50,
+	in_pools = con.aeth,
 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
 	calculate = function(self, card, context)
 		if not context.ending_shop and context.cardarea == G.jokers  then
@@ -146,7 +146,8 @@ SMODS.Joker {
 aetherHunts = {
 	prej .. 'sydtest',
 	prej .. 'test2',
-	prej .. 'skye'
+	prej .. 'skye',
+	prej .. 'Rust'
 	
 }
 

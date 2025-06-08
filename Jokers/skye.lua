@@ -55,6 +55,7 @@ SMODS.Joker {
     soul_pos = {x=0,y=0},
     rarity = 'ocj_concept',
     cost = 50,
+    in_pools = con.skye,
     calculate = function(self, card, context)
         if context.end_of_round and context.cardarea == G.jokers then
             for i=1,card.ability.extra.blackHoleEndofR do

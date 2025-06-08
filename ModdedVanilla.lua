@@ -1,17 +1,4 @@
---[[
-------------------------------Basic Table of Contents------------------------------
-Line 17, Atlas ---------------- Explains the parts of the atlas.
-Line 29, Joker 2 -------------- Explains the basic structure of a joker
-Line 88, Runner 2 ------------- Uses a bit more complex contexts, and shows how to scale a value.
-Line 127, Golden Joker 2 ------ Shows off a specific function that's used to add money at the end of a round.
-Line 163, Merry Andy 2 -------- Shows how to use add_to_deck and remove_from_deck.
-Line 207, Sock and Buskin 2 --- Shows how you can retrigger cards and check for faces
-Line 240, Perkeo 2 ------------ Shows how to use the event manager, eval_status_text, randomness, and soul_pos.
-Line 310, Walkie Talkie 2 ----- Shows how to look for multiple specific ranks, and explains returning multiple values
-Line 344, Gros Michel 2 ------- Shows the no_pool_flag, sets a pool flag, another way to use randomness, and end of round stuff.
-Line 418, Cavendish 2 --------- Shows yes_pool_flag, has X Mult, mainly to go with Gros Michel 2.
-Line 482, Castle 2 ------------ Shows the use of reset_game_globals and colour variables in loc_vars, as well as what a hook is and how to use it.
---]]
+
 prej = "j_ocj_"
 
 --Creates an atlas for cards to use
@@ -26,15 +13,12 @@ SMODS.Atlas {
 	py = 95
 }
 
---[[TODO: ------------------------------------------------------------------------------------------------------------------------------------------
-	1. Document Talisman (or find documentation) DONE and Document Smods a bit better 
-	2. Add Test-Hunted.
-	3. Make Aether Hunt
-	4. Document and make cards look good
-		a. Custom Colors (Make It Easier)
-		b. Badges
-		c. Atlas time (Pathos Reference/??)
-	5. Concept Rarity
+--[[  INFO: ------------------------------------------------------------------------------------------------------------------------------------------
+THE FILES MIGHT CONTAIN SPOILERS FOR POTENTIAL LORE AND MECHANICS. YOU ARE INTENDED TO FIND 
+INTERACTIONS AND OTHER THINGS ON YOUR OWN.
+
+That being said, feel free to look through the code for whatever reason you want to.
+I am just warning you :3
 -----------------------------------------------------------------------------------------------------------------------------------------------------]]
 --[[
 People who have helped so far:
@@ -42,47 +26,31 @@ People who have helped so far:
 - JenLib by JenWalter
 - @ bepisfever on discord
 --]]
---- Rarity
-local conceptRad = SMODS.Gradient {
-	key = 'conceptr',
-	colours = {
-		HEX("a37d1d"),
-		HEX('a31d96'),
-		HEX('3fd1cf'),
-		G.C.RED
+--Placeholder Pack to make it playable. ft. cardMult (okay i meant to type cmt but the autocorrect made it funnier)
 
-	},
-	cycle = 15,
-	interpolation = 'trig'
 
-}
-SMODS.Rarity {
-	key = 'concept',
-	loc_txt = {
-		name = 'Concept'
-	},
-	badge_colour = conceptRad,
-	default_weight = 0
-
-}
 --OTHER IMPLEMENTED ITEMS
 -- Implemented Jokers:
 local listOfJokers = {
 	'aether',
 	'skye',
-	'Toother'
+	'Toother',
+	'Rust'
 }
 local miscFiles = {
 	'UI',
+	'mirror',
+	'raritiesObjects'
 
 }
 --LOADER
+
+for _,v in pairs(miscFiles) do
+	SMODS.load_file("misc/" ..v.. ".lua", 'CardComplex')()
+end
 for _,v in pairs(listOfJokers) do
 	print(v)
 	SMODS.load_file("Jokers/"..v..".lua", 'CardComplex')()
-end
-for _,v in pairs(miscFiles) do
-	SMODS.load_file("misc/" ..v.. ".lua", 'CardComplex')()
 end
 
 ----- Colors
@@ -98,6 +66,39 @@ dj_colours = {
 
 
 -----
+
+SMODS.Atlas {
+	key = 'p_pack',
+	path = 'placeholderpack.png',
+    px = 71,
+    py = 95
+}
+SMODS.Booster {
+	key = 'placeholderpck',
+	atlas = "p_pack",
+	pos = {x=0,y=0},
+	loc_txt = {
+		name = "PL44CEHOlder p4ck.",
+		text = {"Chhoose your concept.",},
+		group_name = 'concept'
+
+
+	},
+	config = {
+		extra = 2,
+		choose = 1
+	},
+	group_key = 'conPack',
+	cost = 15,
+	weight = 0.5,
+	create_card = function(self,card,i)
+		local returned = cc.randomCon()
+		print(returned)
+		return { key = returned, area = G.pack_cards, skip_materialize = true}
+	end
+
+
+}
 
 function returnMin(t)
   local k
@@ -147,14 +148,6 @@ function Game:init_game_object()
 end
 
 
--- function glf.moveJokerUp(jokerslot) 
--- local toSlot = jokerslot + 1
--- local cardstorage = G.jokers.cards[jokerslot]
--- G.jokers.cards[jokerslot] = G.jokers.cards[toSlot]
--- G.jokers.cards[toSlot] = cardstorage
--- print("up")
--- end
-
 function invert_table(table)
     for k,v in ipairs(table) do
     	local invertTable = {}
@@ -164,126 +157,7 @@ function invert_table(table)
 	return {invertTable}
 end
 
--- -------------------------------------INFO: AETHER
--- ae = {} -- Table of functions for Aether but might be used Elsewhere
--- function ae.destroyTarget(target, aethLoc)
--- 	local destroyed = aethLoc + target
--- 	G.jokers.cards[destroyed]:start_dissolve()
-
--- end
-
--- function abilityMove(num)
--- 	local finalnum = ae.aethSearch(num)
--- 	local c = num
--- 	if finalnum == 1 or finalnum == -1 then
--- 		if finalnum == 1 then
--- 			ae.destroyTarget(finalnum,num)
--- 		elseif finalnum == -1 then
--- 			ae.destroyTarget(finalnum,num)
--- 		end
-		
--- 	elseif finalnum > 0 then
--- 		finalnum = nil
--- 			glf.moveJokerDown(c, 'up')
-							
--- 	elseif finalnum < 0 then
--- 		finalnum = nil
--- 			glf.moveJokerDown(c, 'down')
-				
--- 	end
--- end
-
--- function ae.aethSearch(aethLoc)
---     local validtargs = 0
---     local distance = {}
---     for k,v in ipairs(G.jokers.cards) do
---         if glf.findstring(v.label, aetherHunts) then
---             local dist1 = v.rank - aethLoc
---             distance[dist1] = dist1
---         end
---     end
---     local absoluteval = {}
--- 	for c,m in pairs(distance) do
--- 		absoluteval[c] = math.abs(m)
--- 	end
---     local min = returnMin(absoluteval)
---     local inverseTable = invert_table(absoluteval) -- make the abso value the key and therefore accessible
--- 	return distance[min]
--- end
-
--- SMODS.Joker {
--- 	-- How the code refers to the joker.
--- 	key = 'aethercard',
--- 	-- loc_text is the actual name and description that show in-game for the card.
--- 	loc_txt = {
--- 		name = 'Aether',
--- 		text = {
--- 			"{V:1}THE HUNTER",
--- 			"{C:mult}^#1# {} mult.",
--- 			"Mult based off of the last sold card. (Highest number)",
--- 			"Subracted by {C:mult}-#2# {} every round."
--- 		}
--- 	},
--- 	config = { 
--- 		extra = { 
--- 			lastCardCost = 1,
--- 			debuff = 1,
--- 			selfLocation = 0,
--- 			abilitytrig = 0
--- 		} 
--- 	},
--- 	loc_vars = function(self, info_queue, card)
--- 		return { vars = { 
--- 			card.ability.extra.lastCardCost,
--- 			card.ability.extra.debuff,
--- 			colours = {dj_colours.aether}
--- 		 } }
--- 	end,
--- 	-- Sets rarity. 1 common, 2 uncommon, 3 rare, 4 legendary. < Document this too smh
--- 	rarity = 4,
--- 	-- Which atlas key to pull from.
--- 	atlas = 'ModdedVanilla',
--- 	-- This card's position on the atlas, starting at {x=0,y=0} for the very top left.
--- 	pos = { x = 0, y = 0 },
--- 	-- Cost of card in shop.
--- 	cost = 50,
--- 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
--- 	calculate = function(self, card, context)
--- 		if not context.ending_shop and context.cardarea == G.jokers  then
--- 			card.ability.extra.abilityTrig = 0
--- 		end
--- 		if context.joker_main then
--- 				return {
--- 					e_mult = card.ability.extra.lastCardCost	
--- 			}
--- 		end
--- 		if context.selling_card then
--- 			if card.ability.extra.lastCardCost < context.card.sell_cost then
--- 				card.ability.extra.lastCardCost = context.card.sell_cost
--- 			end
--- 		end
--- 		if context.end_of_round and context.cardarea == G.jokers then
--- 			card.ability.extra.lastCardCost = card.ability.extra.lastCardCost - card.ability.extra.debuff
--- 		end
--- 		if context.ending_shop and context.main_eval  then
-			
--- 			if card.ability.extra.abilityTrig == 0 then
--- 				card.ability.extra.abilityTrig = 1
--- 				card.ability.extra.selfLocation = card.rank
--- 				print("Aether is located at:   ".. card.ability.extra.selfLocation)
---     			return {func = abilityMove(card.ability.extra.selfLocation)}
--- 			end
-			
-			
--- 		end
--- 	end
--- 		}
-
--- aetherHunts = {
--- 	prej .. 'sydtest',
--- 	prej .. 'test2'
-	
--- }
+--Lots of cleanup yet to do
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 SMODS.Joker {
 	key = 'sydtest',
