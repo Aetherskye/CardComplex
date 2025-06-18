@@ -6,9 +6,9 @@ return {
         },
         Enhanced={
             m_ocj_mirror ={
-                name = 'mirror',
-                label = 'mirrored',
-                text = {'{C:green}1 in #1#{} chance of breaking when triggered.',
+                name = 'Mirror',
+                label = 'Mirrored',
+                text = {'{C:green}#3# in #1#{} chance of breaking when triggered.',
                 '{X:chips,C:white}#2#X{} Chips.'
             }
             }
@@ -33,6 +33,21 @@ return {
                     '{C: inactive}(currently, ^#3#$, updates at end of shop.)',
                     '{C: attention}Be careful. Destruction always follows.'
                 }
+            },
+            j_ocj_caligatus ={
+                name = 'Caligatus B. Fern',
+                text = {
+                    'Makes mirror cards break {C:green}#1# out of #2#{} times',
+                    'Retrigger them until they break.'
+    }
+            },
+            j_ocj_caligatus2 = {
+                    name = 'Ascended Caligatus',
+                    text = {
+                        'Makes mirror cards break {C:green}#1# out of #2#{} times',
+                        'Retrigger them until they break.',
+                        'Mirror cards give {X:chips,C:white}2x{} chips instead.'
+    }
             }
 
         },
@@ -41,7 +56,18 @@ return {
         Spectral={},
         Stake={},
         Tag={},
-        Tarot={},
+        Tarot={
+            c_ocj_science = {
+                name = "Scientist",
+                text = {
+                    "Enhances {C:attention}#1#{} selected",
+                    "card into a",
+                    "mirror card"
+
+                }
+
+            }
+        },
         Voucher={},
     },
     misc = {

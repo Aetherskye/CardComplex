@@ -2,7 +2,7 @@
 SMODS.Atlas{
     key = 'multi',
     path = 'multi.png',
-    px = 71,
+    px = 76,
     py = 95
 }
 
@@ -25,7 +25,8 @@ SMODS.Joker {
     rarity = 'ocj_concept',
     cost = 50,
     atlas = 'multi',
-    pos = {x=0,y=0},
+    pos = {x=1,y=0},
+    soul_pos = {x=0,y=0},
     perishable_compat = false,
     add_to_deck = function(self,card,from_debuff)
         card:set_eternal(true)

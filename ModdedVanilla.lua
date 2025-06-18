@@ -35,12 +35,14 @@ local listOfJokers = {
 	'aether',
 	'skye',
 	'Toother',
-	'Rust'
+	'Rust',
+	'Caligatus'
 }
 local miscFiles = {
 	'UI',
 	'mirror',
-	'raritiesObjects'
+	'raritiesObjects',
+	'consumables'
 
 }
 --LOADER
